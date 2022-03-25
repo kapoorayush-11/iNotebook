@@ -15,6 +15,7 @@ app.get('/', (req, res) => {
   res.send('Hello Ayu!')
 })
 
+
 app.listen(port, () => {
   
   console.log(`Example app listening at http://localhost:${port}`)  // print terminal mei ho rha yeh using console.log. Nodemon data save krte hei ussey restart kr de rha.

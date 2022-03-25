@@ -1,3 +1,5 @@
+// Iske andar banaye jaayenge mongoose ke models.. dono schemas
+
 const mongoose = require('mongoose');
 
 const NotesSchema = new Schema({
