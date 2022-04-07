@@ -3,7 +3,7 @@ const express = require('express')
 
 connectToMongo();
 const app = express()
-const port = 3000
+const port = 5000
 
 app.use(express.json()) // Middleware that allows side actions to perfom without effecting state updates
 
@@ -11,10 +11,9 @@ app.use(express.json()) // Middleware that allows side actions to perfom without
 app.use('/api/auth', require('./routes/auth'))
 app.use('/api/notes', require('./routes/notes'))
 
-app.get('/', (req, res) => {
-  res.send('Hello Ayu!')
-})
-
+// app.get('/', (req, res) => {
+//   res.send('Hello Ayu!')
+// })
 
 app.listen(port, () => {
   
