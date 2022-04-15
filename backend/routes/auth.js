@@ -14,15 +14,11 @@ const JWT_SECRET = "Ayushisagoodb$oy";
 // ROUTE 1: Create a user using : POST "/api/auth/createuser".
 //Doesn't require Authorization (End point ke baare mei pata chal jaayega ki login chahiye isko  use krne ke liye ki nahi)
 
-router.post(
-  "/createuser",
-  [
+router.post( "/createuser", [
     // If there are errors, return bad request and the errors.
     body("name", "Name must be atleast 3 character").isLength({ min: 3 }),
     body("email", "Not a valid Email format").isEmail(),
-    body("password", "Password must be atleast 5 character").isLength({
-      min: 5,
-    }),
+    body("password", "Password must be atleast 5 character").isLength({min: 5,}),
   ],
   async (req, res) => {
     //if there are errors, return bad request and the errors
@@ -63,7 +59,7 @@ router.post(
       res.json({ authtoken });
     } catch (error) {
       console.error(error.message);
-      res.status(500).send("Some Error Occured");
+      res.status(500).send("Some Error Occured yaar");
     }
   }
 );
@@ -113,7 +109,7 @@ router.post(
       res.json({ authtoken });
     } catch (error) {
       console.error(error.message);
-      res.status(500).send("Internal server error");
+      res.status(500).send("Internal server error bro");
     }
   }
 );
@@ -127,7 +123,7 @@ router.post(
       res.send(user)
     } catch (error) {
       console.error(error.message);
-      res.status(500).send("Internal server error");
+      res.status(500).send("Internal server error hoiya");
     }
   }
 );
