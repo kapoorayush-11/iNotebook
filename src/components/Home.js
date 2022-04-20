@@ -1,11 +1,8 @@
-import React, { useContext } from 'react'
-import noteContext from '../context/notes/noteContext';
+import React from 'react'
+import Notes from './Notes';
 
 const Home = () => {
-  const context = useContext(noteContext);
-  const { notes, setNotes } = context;
-  // destructure of context. Usme se notes and setnotes extract krne.
-
+  
   return (
     <div>
       <div className="container my-3">
@@ -29,13 +26,8 @@ const Home = () => {
         </form>
       </div>
 
-      <div className="container my-3">
-        <h2> Your notes</h2>
-        {notes.map((note) => { 
-          // Not getting why note is used in map function instead of notes.
-          return note.title;
-        })}
-      </div>
+     <Notes/>
+
     </div>
   )
 }
