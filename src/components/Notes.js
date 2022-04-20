@@ -13,7 +13,7 @@ const Notes = () => {
     <h2> Your notes</h2>
     {notes.map((note) => { 
       // Not getting why note is used in map function instead of notes.
-      return <Noteitem note={note}/>
+      return <Noteitem key={note._id} note={note}/>
     })}
   </div>
   )
