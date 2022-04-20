@@ -17,7 +17,7 @@ app.use('/api/notes', require('./routes/notes'))
 
 app.listen(port, () => {
   
-  console.log(`Example app listening at http://localhost:${port}`)  // print terminal mei ho rha yeh using console.log. Nodemon data save krte hei ussey restart kr de rha.
+  console.log(`iNotebook backend listening at http://localhost:${port}`)  // print terminal mei ho rha yeh using console.log. Nodemon data save krte hei ussey restart kr de rha.
 })
 
 
