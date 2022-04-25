@@ -9,7 +9,7 @@ const NoteState = (props) => {
   const [notes, setNotes] = useState(notesInitial)
 
 // Get a note
-  const getNote = async () => {
+  const getNotes = async () => {
 // API call
     const response = await fetch(`${host}/api/notes/fetchallnotes`, {
       method: 'GET',
@@ -35,6 +35,9 @@ const NoteState = (props) => {
       },
       body: JSON.stringify({title, description, tag})
     });
+
+    const json = await response.json();
+    console.log(json);
 
 
     console.log("Adding a new note")
@@ -73,38 +76,41 @@ const NoteState = (props) => {
     setNotes(newNotes)
   }
 
-
   //Edit a note
 
   const editNote = async (id, title, description, tag) => {
 
     // API call
     const response = await fetch(`${host}/api/notes/updatenote/${id}`, {
-      method: 'POST',
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
         "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjI1NTI1ZTlkMDRlZDA1Y2U4NjQxNmQzIn0sImlhdCI6MTY0OTkzNDUyMH0.dH1ogBs197EX1XrOfix4MFRxN5EUCkcHw1J62wk2pf0"
-      },
+              },
       body: JSON.stringify({title, description, tag})
     });
 
-    const json = response.json();
+    const json = await response.json();
+    console.log(json);
 
+    let newNotes = JSON.parse(JSON.stringify (notes))
 
     //logic to edit in client side
-    for (let index = 0; index < notes.length; index++) {
-      const element = notes[index];
+    for (let index = 0; index < newNotes.length; index++) {
+      const element = newNotes[index];
       if (element._id === id) {
-        element.title = title;
-        element.description = description;
-        element.tag = tag;
-      }
+        newNotes[index].title = title;
+        newNotes[index].description = description;
+        newNotes[index].tag = tag;
+        break;
+      }    
     }
+    setNotes(newNotes);
   }
 
 
   return (
-    <NoteContext.Provider value={{ notes, addNote, deleteNote, editNote, getNote }}>{props.children}</NoteContext.Provider>
+    <NoteContext.Provider value={{ notes, addNote, deleteNote, editNote, getNotes }}>{props.children}</NoteContext.Provider>
     // I can also write {{state:state, update:update}}
   );
 };
