@@ -25,9 +25,7 @@ const updateNote = (currentNote) => {
 
 const handleClick = (e) => {
   editNote(note.id, note.etitle, note.edescription, note.etag)
-  refClose.current.click();
-
-  
+  refClose.current.click(); 
 }  
 
 const onChange = (e) => {
@@ -58,12 +56,12 @@ const onChange = (e) => {
             <form className='my-3'>
             <div className="mb-3">
               <label htmlFor="etitle" className="form-label">Title</label>
-              <input type="text" className="form-control" id="etitle" name="etitle" value={note.etitle} placeholder="" aria-describedby="emailHelp" onChange={onChange} />
+              <input type="text" className="form-control" id="etitle" name="etitle" value={note.etitle} placeholder="" aria-describedby="emailHelp" onChange={onChange}  minLength={5} required  />
             </div>
       
             <div className="mb-3">
               <label htmlFor="edescription" className="form-label">Description</label>
-              <input type="text" className="form-control" id="edescription" name="edescription" value={note.edescription} placeholder="" aria-describedby="" onChange={onChange}/>
+              <input type="text" className="form-control" id="edescription" name="edescription" value={note.edescription} placeholder="" aria-describedby="" onChange={onChange} minLength={5} required />
             </div>
       
             <div className="mb-3">
@@ -76,14 +74,17 @@ const onChange = (e) => {
             <div className="modal-footer">
               <button ref={refClose}  type="button" className="btn btn-secondary" data-dismiss="modal">Close
               </button>
-              <button  onClick={handleClick} type="button" className="btn btn-primary">Update</button>
+              <button disabled={note.etitle.length<5 || note.edescription.length<5} onClick={handleClick} type="button" className="btn btn-primary">Update</button>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="row my-3">
+      <div className="row my-4">
         <h2> Your notes</h2>
+        <div className="container mx-2">
+        {notes.length===0 && 'No Notes to display'}
+        </div>
         {notes.map((note) => {
           // Not getting why note is used in map function instead of notes.
           return <Noteitem key={note._id} updateNote={updateNote} note={note} />;
