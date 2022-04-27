@@ -3,13 +3,13 @@ import noteContext from "../context/notes/noteContext";
 import Noteitem from "./Noteitem";
 import AddNote from "./AddNote";
 
-const Notes = () => {
+const Notes = (props) => {
   const context = useContext(noteContext);
   const { notes, getNotes, editNote } = context;
   // destructure of context. Usme se notes and setnotes extract krne.
  
 
-  useEffect(() => {
+useEffect(() => {
  getNotes()
 // eslint-disable-next-line
   }, [])
@@ -21,11 +21,13 @@ const [note, setNote] = useState({ id:"",  etitle:"", edescription:"", etag:""})
 const updateNote = (currentNote) => {
     ref.current.click();
     setNote({id: currentNote._id,   etitle: currentNote.title, edescription: currentNote.description, etag: currentNote.tag})
+   
   } 
 
 const handleClick = (e) => {
   editNote(note.id, note.etitle, note.edescription, note.etag)
-  refClose.current.click(); 
+  refClose.current.click();
+  props.showAlert("Updated successfully", "success") 
 }  
 
 const onChange = (e) => {
@@ -36,7 +38,7 @@ const onChange = (e) => {
   return (
 
     <>
-      <AddNote />
+      <AddNote showAlert={props.showAlert} />
       <button ref={ref} type="button" className="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#exampleModal">
     Update Note
     </button>
@@ -87,7 +89,7 @@ const onChange = (e) => {
         </div>
         {notes.map((note) => {
           // Not getting why note is used in map function instead of notes.
-          return <Noteitem key={note._id} updateNote={updateNote} note={note} />;
+          return <Noteitem key={note._id} updateNote={updateNote} showAlert={props.showAlert} note={note} />;
         })}
       </div>
     </>
