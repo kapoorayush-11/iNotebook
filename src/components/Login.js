@@ -17,11 +17,13 @@ const navigate = useNavigate();
   });
       const json = await response.json();
       console.log(json);
+
       if(json.success) {
         //save the auth token and then redirect
         localStorage.setItem('token', json.authtoken);
-        navigate("/");
         props.showAlert("Logged in Successfully", "success");
+        navigate("/");
+        
       }else{
         props.showAlert("Invalid Credentials", "danger");
       }
@@ -33,7 +35,8 @@ const navigate = useNavigate();
 
 
   return (
-    <div>
+    <div className="mt-3">
+    <h2>Log in to use Inotebook</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="email" className="form-label"> Email address </label>

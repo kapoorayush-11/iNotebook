@@ -33,8 +33,9 @@ const handleSubmit = async (e) => {
           }
 
   return (
-    <div>
-    <form onSubmit={handleSubmit}>
+    <div className="mt-3 ">
+    <h2 className="my-4">Sign Up to start using Inotebook</h2>
+    <form  onSubmit={handleSubmit}>
   <div className="mb-3">
     <label htmlFor="name" className="form-label">Name</label>
     <input type="text" className="form-control" id="name" name="name" placeholder="" onChange={onChange}aria-describedby="emailHelp"/>
